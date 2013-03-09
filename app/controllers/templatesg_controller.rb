@@ -2,11 +2,11 @@ class TemplatesgController < ApplicationController
   unloadable
   model_object WikiTemplatesg
   layout 'admin'
-  
+
   before_filter :require_admin
 
   def index
-@templates = WikiTemplatesg.find(:all)
+    @templates = WikiTemplatesg.find(:all)
     render :action => "index", :layout => false if request.xhr?
   end
 
@@ -41,9 +41,9 @@ class TemplatesgController < ApplicationController
       @mitemplate.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to :controller => 'templatesg', :action => 'index'
-    else 
+    else
       @mitemplate = WikiTemplatesg.find(params[:id])
-    end	
+    end
   end
 end
 

@@ -3,9 +3,6 @@ class TemplatesController < ApplicationController
   menu_item :settings
   model_object WikiTemplates
   before_filter :find_project, :authorize , :only => [:new, :edit, :destroy]
- 
-
-
 
   def index
   end
@@ -46,19 +43,17 @@ class TemplatesController < ApplicationController
       @mitemplate.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to :controller => 'projects', :action => 'settings', :tab => 'template', :id => @project
-    else 
+    else
       @mitemplate = WikiTemplates.find(params[:id])
-    end	
+    end
   end
 
   def find_project
     @project = Project.find(params[:project_id])
-    if params[:project_id] 
-	@project_id= params[:project_id] 
+    if params[:project_id]
+      @project_id = params[:project_id]
     end
     rescue ActiveRecord::RecordNotFound
     render_404
   end
 end
-
-
