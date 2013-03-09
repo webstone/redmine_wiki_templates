@@ -1,9 +1,9 @@
 class AddMissingIndexesToWikiTemplates < ActiveRecord::Migration
   def self.up
-    add_column :wiki_templates, :visible_children, :boolean, :default => true
+    add_index :wiki_templates, :project_id
   end
 
   def self.down
-    remove_column :wiki_templates, :visible_children
+    remove_index :wiki_templates, :project_id
   end
 end
