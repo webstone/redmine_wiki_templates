@@ -6,8 +6,6 @@ Rails.configuration.to_prepare do
   WikiController.send(:include, WikiControllerPatch)
   require_dependency 'projects_helper'
   ProjectsHelper.send(:include, ProjectsHelperPatch)
-  require_dependency 'projects_controller'
-  ProjectsController.send(:include, ProjectsControllerPatch)
 end
 
 Redmine::Plugin.register :redmine_gsc_plantillas do
