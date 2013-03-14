@@ -66,11 +66,6 @@ module WikiControllerPatch
           if User.current.allowed_to?(:edit_wiki_pages, @project) && editable?
             @templates = WikiTemplates.find_all_by_project_id(@project.id)
             @templatesg = WikiTemplatesg.find(:all)
-            @miproject = Project.find(params[:project_id])
-            mychildrentree = Mychildtree.new
-            mychildrentree.parent = @miproject.parent_id
-            @templatesg = WikiTemplatesg.find(:all)
-            @myfamily = mychildrentree.parentage
             allowed_parents = @project.allowed_parents.compact
             listprojects_id = allowed_parents.map{|p| p.id} if allowed_parents
             @templatesf = WikiTemplates.where(:project_id => listprojects_id, :visible_children => true)
