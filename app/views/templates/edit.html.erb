@@ -1,4 +1,4 @@
-<h2><%=@mitemplate.name%></h2>
+<h2><%= @mitemplate.name %></h2>
 
 <%= labelled_form_for  @mitemplate, :as => :mitemplate , :url => {:action => 'edit',:project_id => @project.id}, :html => {:method => :post, :multipart => false, :id => 'template_form'} do |f| %>
 <div class="box tabular">
