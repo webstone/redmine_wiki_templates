@@ -16,7 +16,7 @@ class TemplatesgController < ApplicationController
       @mitemplate = WikiTemplatesg.new
       @mitemplate.text = params[:mitemplate][:text]
       @mitemplate.name = params[:mitemplate][:name]
-      @mitemplate.author_id = User.current
+      @mitemplate.author_id = User.current.id
       @mitemplate.save
       redirect_to :controller => 'templatesg', :action => 'index'
     end

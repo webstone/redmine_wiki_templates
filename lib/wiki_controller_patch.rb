@@ -2,6 +2,7 @@ module WikiControllerPatch
   def self.included(base)
     base.send(:include, InstanceMethods)
     base.class_eval do
+      unloadable
       alias_method_chain :edit, :template
       alias_method_chain :show, :template
       alias_method_chain :preview, :template
@@ -61,25 +62,18 @@ module WikiControllerPatch
       myfamily = []
       @project_id = @project.id
       if @page.new_record?
-        if @project.enabled_module_names.include?('templates')
+        if @project.module_enabled?('templates')
           if User.current.allowed_to?(:edit_wiki_pages, @project) && editable?
-            @templates = WikiTemplates.find(:all,:conditions => ["project_id = ? " , @project_id ])
+            @templates = WikiTemplates.find_all_by_project_id(@project.id)
             @templatesg = WikiTemplatesg.find(:all)
             @miproject = Project.find(params[:project_id])
             mychildrentree = Mychildtree.new
             mychildrentree.parent = @miproject.parent_id
             @templatesg = WikiTemplatesg.find(:all)
             @myfamily = mychildrentree.parentage
-            listprojects_id = ''
-            for i in 0..@myfamily.length-1
-              listprojects_id += @myfamily[i].to_s + ' , '
-            end
-            if listprojects_id
-              listprojects_id = listprojects_id[0,listprojects_id.length-2]
-            end
-            if listprojects_id
-              @templatesf = WikiTemplates.find(:all,:conditions => "project_id in (" + listprojects_id + ") and visible_children is true ")
-            end
+            allowed_parents = @project.allowed_parents.compact
+            listprojects_id = allowed_parents.map{|p| p.id} if allowed_parents
+            @templatesf = WikiTemplates.where(:project_id => listprojects_id, :visible_children => true)
             render 'eligeplantilla'
           else
             render_404

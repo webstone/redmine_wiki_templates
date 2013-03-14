@@ -15,7 +15,7 @@ class TemplatesController < ApplicationController
       @mitemplate.name = params[:mitemplate][:name]
       @mitemplate.visible_children = params[:mitemplate][:visible_children]
       @mitemplate.project_id = @project_id
-      @mitemplate.author_id = User.current
+      @mitemplate.author_id = User.current.id
       @mitemplate.save
       redirect_to :controller => 'projects', :action => 'settings', :tab => 'template', :id => @project
     end

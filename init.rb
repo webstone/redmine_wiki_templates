@@ -1,27 +1,13 @@
 require 'redmine'
 
-# Including dispatcher.rb in case of Rails 2.x
-require 'dispatcher' unless Rails::VERSION::MAJOR >= 3
-
-if Rails::VERSION::MAJOR >= 3
-  ActionDispatch::Callbacks.to_prepare do
-    # use require_dependency if you plan to utilize development mode
-    require_dependency 'wiki_controller'
-    WikiController.send(:include, WikiControllerPatch)
-    require_dependency 'projects_helper'
-    ProjectsHelper.send(:include, ProjectsHelperPatch)
-    require_dependency 'projects_controller'
-    ProjectsController.send(:include, ProjectsControllerPatch)
-  end
-else
-  Dispatcher.to_prepare :redmine_gsc_plantillas do
-    require_dependency 'wiki_controller'
-    WikiController.send(:include, WikiControllerPatch)
-    require_dependency 'projects_helper'
-    ProjectsHelper.send(:include, ProjectsHelperPatch)
-    require_dependency 'projects_controller'
-    ProjectsController.send(:include, ProjectsControllerPatch)
-  end
+Rails.configuration.to_prepare do
+  # use require_dependency if you plan to utilize development mode
+  require_dependency 'wiki_controller'
+  WikiController.send(:include, WikiControllerPatch)
+  require_dependency 'projects_helper'
+  ProjectsHelper.send(:include, ProjectsHelperPatch)
+  require_dependency 'projects_controller'
+  ProjectsController.send(:include, ProjectsControllerPatch)
 end
 
 Redmine::Plugin.register :redmine_gsc_plantillas do
