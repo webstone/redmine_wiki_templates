@@ -2,7 +2,7 @@
 
 <h2><%=h @page.pretty_title %></h2>
 
-<%= labelled_form_for @template, :as => :template,:url => {:action => 'edit', :action => 'edit', :project_id => @project_id, :id => @page.title}, :html => {:method => :get, :multipart => false, 
+<%= labelled_form_for @template, :as => :template,:url => {:action => 'edit', :action => 'edit', :project_id => @project.id, :id => @page.title}, :html => {:method => :get, :multipart => false, 
 :id => 'wiki_form'}  do |f| %>
 <%= error_messages_for 'content' %>
 
@@ -29,7 +29,7 @@
 <br>
 <div id="preview" class="wiki"></div>
 <p><%= submit_tag l(:label_template_select) %>
-     <%= preview_link({:controller => 'wiki', :action => 'preview', :project_id => @project, :id => @page.title }, 'wiki_form') %></p>
+     <%= preview_link({:controller => 'wiki', :action => 'preview', :project_id => @project.id, :id => @page.title }, 'wiki_form') %></p>
 <%= wikitoolbar_for 'content_text' %>
 <% end %>
 

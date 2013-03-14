@@ -1,5 +1,5 @@
 <h2><%=h @page.pretty_title %></h2>
-<% form_for :template, @template, :url => {:action => 'edit', :action => 'edit', :project_id => @project_id, :id => @page.title}, :html => {:method => :get, :multipart => false, 
+<% form_for :template, @template, :url => {:action => 'edit', :action => 'edit', :project_id => @project.id, :id => @page.title}, :html => {:method => :get, :multipart => false, 
 :id => 'wiki_form'} do |f| %>
 <%= error_messages_for 'content' %>
 
@@ -30,7 +30,7 @@
 <div id="preview" class="wiki"></div>
 <p><%= submit_tag l(:label_template_select) %>
    <%= link_to_remote l(:label_preview), 
-                       { :url => { :controller => 'wiki', :action => 'preview', :project_id => @project, :id => @page.title },
+                       { :url => { :controller => 'wiki', :action => 'preview', :project_id => @project.id, :id => @page.title },
                          :method => :post,
                          :update => 'preview',
                           :with => "Form.serialize('wiki_form')",

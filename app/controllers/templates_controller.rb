@@ -14,7 +14,7 @@ class TemplatesController < ApplicationController
       @mitemplate.text = params[:mitemplate][:text]
       @mitemplate.name = params[:mitemplate][:name]
       @mitemplate.visible_children = params[:mitemplate][:visible_children]
-      @mitemplate.project_id = @project_id
+      @mitemplate.project_id = @project.id
       @mitemplate.author_id = User.current.id
       @mitemplate.save
       redirect_to :controller => 'projects', :action => 'settings', :tab => 'template', :id => @project
@@ -39,7 +39,7 @@ class TemplatesController < ApplicationController
       @mitemplate.text = params[:mitemplate][:text]
       @mitemplate.name = params[:mitemplate][:name]
       @mitemplate.visible_children = params[:mitemplate][:visible_children]
-      @mitemplate.project_id = @project_id
+      @mitemplate.project_id = @project.id
       @mitemplate.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to :controller => 'projects', :action => 'settings', :tab => 'template', :id => @project
@@ -48,12 +48,13 @@ class TemplatesController < ApplicationController
     end
   end
 
+  private
+
   def find_project
-    @project = Project.find(params[:project_id])
-    if params[:project_id]
-      @project_id = params[:project_id]
-    end
+    begin
+      @project = Project.find(params[:project_id])
     rescue ActiveRecord::RecordNotFound
-    render_404
+      render_404
+    end
   end
 end

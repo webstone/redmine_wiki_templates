@@ -10,7 +10,6 @@ module ProjectsControllerPatch
   module InstanceMethods
     def settings_with_template
       settings_without_template
-      @project_id = @project.id
       @templates = WikiTemplates.find_all_by_project_id(@project.id)
     end
   end
