@@ -54,7 +54,7 @@ module WikiControllerPatch
         @text, @section_hash = Redmine::WikiFormatting.formatter.new(@text).get_section(@section)
         render_404 if @text.blank?
       end
-      render 'my_edit'
+      render :action => 'my_edit'
     end
 
     # display a page (in editing mode if it doesn't exist)
@@ -67,7 +67,7 @@ module WikiControllerPatch
             allowed_parents = @project.allowed_parents.compact
             listprojects_id = allowed_parents.map{|p| p.id} if allowed_parents
             @templatesf = WikiTemplates.where(:project_id => listprojects_id, :visible_children => true)
-            render 'eligeplantilla'
+            render :action => 'eligeplantilla'
           else
             render_404
           end
@@ -82,30 +82,7 @@ module WikiControllerPatch
         end
         return
       end
-      if params[:version] && !User.current.allowed_to?(:view_wiki_edits, @project)
-        # Redirects user to the current version if he's not allowed to view previous versions
-        redirect_to :version => nil
-        return
-      end
-      @content = @page.content_for_version(params[:version])
-      if User.current.allowed_to?(:export_wiki_pages, @project)
-        if params[:format] == 'pdf'
-          send_data(wiki_page_to_pdf(@page, @project), :type => 'application/pdf', :filename => "#{@page.title}.pdf")
-          return
-        elsif params[:format] == 'html'
-          export = render_to_string :action => 'export', :layout => false
-          send_data(export, :type => 'text/html', :filename => "#{@page.title}.html")
-          return
-        elsif params[:format] == 'txt'
-          send_data(@content.text, :type => 'text/plain', :filename => "#{@page.title}.txt")
-          return
-        end
-      end
-      @editable = editable?
-      @sections_editable = @editable && User.current.allowed_to?(:edit_wiki_pages, @page.project) &&
-      @content.current_version? &&
-      Redmine::WikiFormatting.supports_section_edit?
-      render :action => 'show'
+      show_without_template
     end
 
     def preview_with_template
