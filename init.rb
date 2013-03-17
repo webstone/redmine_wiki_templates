@@ -8,13 +8,13 @@ Rails.configuration.to_prepare do
   ProjectsHelper.send(:include, ProjectsHelperPatch)
 end
 
-Redmine::Plugin.register :redmine_gsc_plantillas do
-  name 'Redmine Gsc Plantillas plugin'
-  author 'Marta Gonzalez de Chaves Aguilera'
-  description 'This is a plugin for Redmine. Show a template when you add a new page'
-  version '0.1.0'
-  url 'http://www.gsc.es'
-  author_url 'http://www.gsc.es'
+Redmine::Plugin.register :redmine_wiki_templates do
+  name 'Redmine Wiki Templates plugin'
+  author 'Marta Gonzalez de Chaves Aguilera, Daigo UCHIYAMA'
+  description 'This plugin allow you choose a wiki template when you add a new wiki page.'
+  version '0.2.0'
+  url 'https://github.com/ucho/redmine_wiki_templates'
+  requires_redmine :version_or_higher => '2.2.0'
   project_module :templates do
     permission :view_templates, :templates => :find_project
     permission :create_templates, :templates => [:new, :find_project]
@@ -26,6 +26,6 @@ end
 
 class RedmineToolbarHookListener < Redmine::Hook::ViewListener
   def view_layouts_base_html_head(context)
-    stylesheet_link_tag('gsc_plantillas', :plugin => :redmine_gsc_plantillas )
+    stylesheet_link_tag('gsc_plantillas', :plugin => :redmine_wiki_templates)
   end
 end
