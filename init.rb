@@ -15,11 +15,11 @@ Redmine::Plugin.register :redmine_wiki_templates do
   version '0.2.0'
   url 'https://github.com/ucho/redmine_wiki_templates'
   requires_redmine :version_or_higher => '2.2.0'
-  project_module :templates do
-    permission :view_templates, :templates => :find_project
-    permission :create_templates, :templates => [:new, :find_project]
-    permission :delete_templates, :templates => [:destroy, :find_project]
-    permission :edit_templates, :templates => [:edit, :find_project]
+  project_module :wiki_templates do
+    permission :view_templates, :templates => [:index]
+    permission :create_templates, :templates => [:new]
+    permission :delete_templates, :templates => [:destroy]
+    permission :edit_templates, :templates => [:edit]
   end
   menu :admin_menu, :templatesg, { :controller => 'templatesg', :action => 'index' }, :caption => :app_menu_global_templates
 end

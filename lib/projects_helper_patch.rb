@@ -11,11 +11,11 @@ module ProjectsHelperPatch
     def project_settings_tabs_with_template
       tabs = project_settings_tabs_without_template
       tabs << {
-        :name => 'templates',
+        :name => 'wiki_templates',
         :action => :view_templates,
         :partial => 'projects/settings/templates',
         :label => :label_template
-      } if @project.module_enabled?('templates') and User.current.allowed_to?(:view_templates, @project)
+      } if @project.module_enabled?(:wiki_templates) and User.current.allowed_to?(:view_templates, @project)
       tabs
     end
   end

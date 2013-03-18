@@ -60,7 +60,7 @@ module WikiControllerPatch
     # display a page (in editing mode if it doesn't exist)
     def show_with_template
       if @page.new_record?
-        if @project.module_enabled?('templates')
+        if @project.module_enabled?(:wiki_templates)
           if User.current.allowed_to?(:edit_wiki_pages, @project) && editable?
             @templates = WikiTemplates.find_all_by_project_id(@project.id)
             @templatesg = WikiTemplatesg.find(:all)

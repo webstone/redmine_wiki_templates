@@ -17,7 +17,7 @@ class TemplatesController < ApplicationController
       @mitemplate.project_id = @project.id
       @mitemplate.author_id = User.current.id
       @mitemplate.save
-      redirect_to :controller => 'projects', :action => 'settings', :tab => 'template', :id => @project
+      redirect_to :controller => 'projects', :action => 'settings', :tab => 'wiki_templates', :id => @project
     end
   end
 
@@ -28,7 +28,7 @@ class TemplatesController < ApplicationController
       @mitemplate.destroy
       flash[:notice] = l(:label_template_delete)
     end
-    redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => 'template'
+    redirect_to :controller => 'projects', :action => 'settings', :tab => 'wiki_templates', :id => @project
     return
   end
 
@@ -42,7 +42,7 @@ class TemplatesController < ApplicationController
       @mitemplate.project_id = @project.id
       @mitemplate.save
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :controller => 'projects', :action => 'settings', :tab => 'template', :id => @project
+      redirect_to :controller => 'projects', :action => 'settings', :tab => 'wiki_templates', :id => @project
     else
       @mitemplate = WikiTemplates.find(params[:id])
     end
