@@ -1,4 +1,4 @@
-module WikiControllerPatch
+module WikiTemplatesWikiControllerPatch
   def self.included(base)
     base.send(:include, InstanceMethods)
     base.class_eval do
@@ -33,12 +33,7 @@ module WikiControllerPatch
       when '0'
         @content.text = initial_page_content(@page) if @content.text.blank?
       else
-        if select_elige_plantilla.to_s.index('*')
-          id_template_chosen = select_elige_plantilla[0,select_elige_plantilla.length-1]
-          miwiki = WikiTemplatesg.find(id_template_chosen)
-        else
-          miwiki = WikiTemplates.find(select_elige_plantilla)
-        end
+        miwiki = WikiTemplate.find(select_elige_plantilla)
         @content.text = miwiki.text
       end
 
@@ -62,11 +57,8 @@ module WikiControllerPatch
       if @page.new_record?
         if @project.module_enabled?(:wiki_templates)
           if User.current.allowed_to?(:edit_wiki_pages, @project) && editable?
-            @templates = WikiTemplates.find_all_by_project_id(@project.id)
-            @templatesg = WikiTemplatesg.find(:all)
-            allowed_parents = @project.allowed_parents.compact
-            listprojects_id = allowed_parents.map{|p| p.id} if allowed_parents
-            @templatesf = WikiTemplates.where(:project_id => listprojects_id, :visible_children => true)
+            @local_templates = WikiTemplate.owned_by(@project.id)
+            @public_templates = WikiTemplate.others_public(@project.id)
             render :action => 'eligeplantilla'
           else
             render_404
@@ -90,14 +82,8 @@ module WikiControllerPatch
       if params[:issue_plantilla]
         select_elige_plantilla = params[:issue_plantilla]
         if select_elige_plantilla!='0'
-          if select_elige_plantilla.to_s.index('*')
-            id_template_chosen = select_elige_plantilla[0,select_elige_plantilla.length-1]
-            ptemplate = WikiTemplatesg.find(id_template_chosen)
-            @text = ptemplate.text
-          else
-            ptemplate = WikiTemplates.find(select_elige_plantilla)
-            @text = ptemplate.text
-          end
+          ptemplate = WikiTemplate.find(select_elige_plantilla)
+          @text = ptemplate.text
         else
           @text = ''
         end

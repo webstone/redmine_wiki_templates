@@ -1,7 +1,7 @@
-class TemplatesController < ApplicationController
+class WikiTemplatesController < ApplicationController
   unloadable
   menu_item :settings
-  model_object WikiTemplates
+  model_object WikiTemplate
   before_filter :find_wiki_template, :only => [:edit, :destroy]
   before_filter :find_project, :authorize , :only => [:new, :edit, :destroy]
 
@@ -10,12 +10,10 @@ class TemplatesController < ApplicationController
 
   def new
     if request.post?
-      @mitemplate = WikiTemplates.new
+      @mitemplate = WikiTemplate.new(:project => @project, :author => User.current)
       @mitemplate.text = params[:mitemplate][:text]
       @mitemplate.name = params[:mitemplate][:name]
-      @mitemplate.visible_children = params[:mitemplate][:visible_children]
-      @mitemplate.project = @project
-      @mitemplate.author = User.current
+      @mitemplate.is_public = params[:mitemplate][:is_public]
       if @mitemplate.save
         flash[:notice] = l(:notice_successful_create)
       end
@@ -35,7 +33,7 @@ class TemplatesController < ApplicationController
     if request.post?
       @mitemplate.text = params[:mitemplate][:text]
       @mitemplate.name = params[:mitemplate][:name]
-      @mitemplate.visible_children = params[:mitemplate][:visible_children]
+      @mitemplate.is_public = params[:mitemplate][:is_public]
       if @mitemplate.save
         flash[:notice] = l(:notice_successful_update)
       end
@@ -55,7 +53,7 @@ class TemplatesController < ApplicationController
 
   def find_wiki_template
     begin
-      @mitemplate = WikiTemplates.find(params[:id])
+      @mitemplate = WikiTemplate.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       render_404
     end

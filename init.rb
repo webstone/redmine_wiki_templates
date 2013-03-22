@@ -3,9 +3,9 @@ require 'redmine'
 Rails.configuration.to_prepare do
   # use require_dependency if you plan to utilize development mode
   require_dependency 'wiki_controller'
-  WikiController.send(:include, WikiControllerPatch)
+  WikiController.send(:include, WikiTemplatesWikiControllerPatch)
   require_dependency 'projects_helper'
-  ProjectsHelper.send(:include, ProjectsHelperPatch)
+  ProjectsHelper.send(:include, WikiTemplatesProjectsHelperPatch)
 end
 
 Redmine::Plugin.register :redmine_wiki_templates do
@@ -16,10 +16,9 @@ Redmine::Plugin.register :redmine_wiki_templates do
   url 'https://github.com/ucho/redmine_wiki_templates'
   requires_redmine :version_or_higher => '2.2.0'
   project_module :wiki_templates do
-    permission :show_wiki_templates, {:templates => [:index]}
-    permission :manage_wiki_templates, {:templates => [:new, :edit, :destroy]}
+    permission :show_wiki_templates, {:wiki_templates => [:index]}
+    permission :manage_wiki_templates, {:wiki_templates => [:new, :edit, :destroy]}
   end
-  menu :admin_menu, :templatesg, { :controller => 'templatesg', :action => 'index' }, :caption => :app_menu_global_templates
 end
 
 class RedmineToolbarHookListener < Redmine::Hook::ViewListener
