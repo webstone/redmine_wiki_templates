@@ -16,8 +16,8 @@ Redmine::Plugin.register :redmine_wiki_templates do
   url 'https://github.com/ucho/redmine_wiki_templates'
   requires_redmine :version_or_higher => '2.2.0'
   project_module :wiki_templates do
-    permission :show_wiki_templates, {:wiki_templates => [:index]}
-    permission :manage_wiki_templates, {:wiki_templates => [:new, :edit, :destroy]}
+    permission :show_wiki_templates, {:wiki_templates => [:show]}
+    permission :manage_wiki_templates, {:wiki_templates => [:new, :edit, :update, :destroy]}
   end
 end
 

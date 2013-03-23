@@ -4,7 +4,7 @@ class CreateWikiTemplates < ActiveRecord::Migration
       t.integer    :author_id, :default => 0, :null => false
       t.text       :text
       t.string     :name, :default => "", :null => false
-      t.integer    :project_id
+      t.integer    :project_id, :default => 0, :null => false
       t.boolean    :is_public, :default => false, :null => false
       t.timestamps
     end

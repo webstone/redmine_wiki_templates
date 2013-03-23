@@ -1,0 +1,27 @@
+<table class="list">
+  <thead>
+    <tr>
+      <th><%= l(:label_template) %></th>
+      <th>public</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%- WikiTemplate.owned_by(@project.id).each do |template| %>
+  <%- unless template.new_record? %>
+    <tr class="<%= cycle 'odd', 'even' %>">
+      <td><%= h(template.name) %></td>
+      <td class="center"><%= checked_image if template.is_public %></td>
+      <td class="buttons">
+        <%- if User.current.allowed_to?(:manage_wiki_templates, @project) %>
+        <%= link_to l(:button_edit), edit_wiki_template_path(template), :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
+        <%= delete_link wiki_template_path(template) %>
+        <%- end %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>
+
+<p><%= link_to_if_authorized l(:label_template_new), {:controller => 'wiki_templates', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %></p>

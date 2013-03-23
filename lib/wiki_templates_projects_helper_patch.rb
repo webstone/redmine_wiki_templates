@@ -12,7 +12,7 @@ module WikiTemplatesProjectsHelperPatch
       tabs = project_settings_tabs_without_wiki_templates
       tabs << {
         :name => 'wiki_templates',
-        :partial => 'projects/settings/wiki_templates',
+        :partial => 'wiki_templates/index',
         :label => :label_template
       } if @project.module_enabled?(:wiki_templates) and User.current.allowed_to?(:manage_wiki_templates, @project)
       tabs
