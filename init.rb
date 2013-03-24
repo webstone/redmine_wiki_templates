@@ -17,7 +17,7 @@ Redmine::Plugin.register :redmine_wiki_templates do
   requires_redmine :version_or_higher => '2.2.0'
   project_module :wiki_templates do
     permission :show_wiki_templates, {:wiki_templates => [:show]}
-    permission :manage_wiki_templates, {:wiki_templates => [:new, :edit, :update, :destroy]}
+    permission :manage_wiki_templates, {:wiki_templates => [:new, :edit, :update, :destroy, :preview]}
   end
 end
 

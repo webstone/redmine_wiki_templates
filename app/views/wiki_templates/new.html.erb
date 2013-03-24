@@ -1,6 +1,9 @@
 <h2><%= l(:label_template_new) %></h2>
 
-<%= labelled_form_for @wiki_template, :url => {:action => 'new', :project_id => @project.id}, :html => {:multipart => false} do |f| %>
+<%= labelled_form_for @wiki_template, :url => {:action => 'new', :project_id => @project.id}, :html => {:multipart => false, :id => 'wiki_template_form'} do |f| %>
 <%= render :partial => 'form', :locals => {:f => f} %>
 <%= submit_tag l(:button_create) %>
+<%= preview_link({:controller => 'wiki_templates', :action => 'preview'}, 'wiki_template_form') %>
 <% end %>
+
+<div id="preview" class="wiki"></div>

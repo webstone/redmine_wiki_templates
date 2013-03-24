@@ -3,9 +3,9 @@ class WikiTemplatesController < ApplicationController
   menu_item :settings
   model_object WikiTemplate
   before_filter :find_project_by_project_id, :only => [:new]
-  before_filter :find_model_object, :except => [:new]
-  before_filter :find_project_from_association, :except => [:new]
-  before_filter :authorize
+  before_filter :find_model_object, :except => [:new, :preview]
+  before_filter :find_project_from_association, :except => [:new, :preview]
+  before_filter :authorize, :except => :preview
 
   def show
   end
@@ -41,5 +41,14 @@ class WikiTemplatesController < ApplicationController
       flash[:notice] = l(:notice_successful_delete)
     end
     redirect_to :controller => 'projects', :action => 'settings', :tab => 'wiki_templates', :id => @project
+  end
+
+  def preview
+    template = WikiTemplate.find_by_id(params[:id])
+    if template
+      @previewed = template.text
+    end
+    @text = params[:wiki_template] ? params[:wiki_template][:text] : nil
+    render :partial => 'common/preview'
   end
 end
