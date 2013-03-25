@@ -4,11 +4,8 @@ class WikiTemplatesController < ApplicationController
   model_object WikiTemplate
   before_filter :find_project_by_project_id, :only => [:new]
   before_filter :find_model_object, :except => [:new, :preview]
-  before_filter :find_project_from_association, :except => [:new, :preview]
-  before_filter :authorize, :except => :preview
-
-  def show
-  end
+  before_filter :find_project_from_association, :except => [:new, :preview, :load]
+  before_filter :authorize, :except => [:preview, :load]
 
   def new
     @wiki_template = WikiTemplate.new(:project => @project, :author => User.current)
@@ -50,5 +47,9 @@ class WikiTemplatesController < ApplicationController
     end
     @text = params[:wiki_template] ? params[:wiki_template][:text] : nil
     render :partial => 'common/preview'
+  end
+
+  def load
+    render :text => @wiki_template.text
   end
 end
