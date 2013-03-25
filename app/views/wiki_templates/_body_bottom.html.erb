@@ -23,18 +23,7 @@
 <%- end %>
 </select>
 <%= submit_tag 'Load', :id => 'load_wiki_template' %>
-<!--<button id="load_wiki_template">Load</button>-->
 </p></div>
-
-<!--
-
-ボタンを押したらAjaxでテンプレートをロードする
-プレビュー機能を参考に。
-issue_templateを参考に作ろう。
-もしテキストが書き換えられていたら、警告を出す
-
--->
-
 <script type='text/javascript'>
   var wiki_templates_select = $('#wiki_templates_select');
   $('#wiki_form').before(wiki_templates_select);
