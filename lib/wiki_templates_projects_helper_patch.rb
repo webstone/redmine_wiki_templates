@@ -13,7 +13,7 @@ module WikiTemplatesProjectsHelperPatch
       tabs << {
         :name => 'wiki_templates',
         :partial => 'wiki_templates/index',
-        :label => :label_template
+        :label => :project_module_wiki_templates
       } if @project.module_enabled?(:wiki_templates) and User.current.allowed_to?(:manage_wiki_templates, @project)
       tabs
     end

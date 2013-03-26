@@ -19,7 +19,7 @@
   <option value="<%= template.id %>">[<%= template.project.name %>] <%= template.name %></option>
 <%- end %>
 </select>
-<%= submit_tag 'Load', :id => 'load_wiki_template' %>
+<%= submit_tag l(:label_load_template), :id => 'load_wiki_template' %>
 <span id="wiki_template_notice" style="display: none;"></span>
 </p></div>
 <script type='text/javascript'>
@@ -28,13 +28,13 @@
   $('#load_wiki_template').click(function() {
     var selected_id = $('#wiki_template_selected').val();
     if (selected_id === "0") return;
-    if (confirm("the content will be replaced by template's text. sure?")) {
+    if (confirm("<%= l(:text_confirm_load_template) %>")) {
       $.get(
         "<%= url_for(:controller => 'wiki_templates', :action => :load) %>",
         $.param({id: selected_id}),
         function(data) {
           $("#content_text").val(data);
-          notify_success("done.");
+          notify_success("<%= l(:text_notify_success_of_loading) %>");
         },
         "text"
       );
