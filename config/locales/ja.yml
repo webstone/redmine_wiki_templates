@@ -1,4 +1,4 @@
-# English strings go here for Rails i18n
+# Japanese strings go here for Rails i18n
 ja:
   project_module_wiki_templates: "Wiki templates"
   label_template: "テンプレート"
