@@ -5,45 +5,43 @@
   return unless controller.class.name == 'WikiController'
   return unless @page.new_record?
 
-  local_templates = WikiTemplate.owned_by(@project.id)
-  public_templates = WikiTemplate.others_public(@project.id)
+  local_templates = WikiTemplate.owned_by(@project.id).sort_by_name
+  available_templates = WikiTemplate.others_available(@project.id).sort_by_proj
 %>
 <div id="wiki_templates_select" class="box tabular"><p>
 <label for="wiki_template_selected"><%= l(:label_choose_template) %></label>
 <select id="wiki_template_selected" name="wiki_template_selected">
-  <option value="0" selected="selected"><%= l(:label_wiki_blanco) %></option>
+  <option value="0" selected="selected">----</option>
 <%- local_templates.each do |template| %>
   <option value="<%= template.id %>"><%= template.name %></option>
 <%- end %>
-<%- unless public_templates.empty? %>
-  <optgroup label='--<%= l(:label_global_sep_template) %>--' ></optgroup>
-  <%- public_templates.each do |template| %>
-  <option value="<%= template.id %>"><%= template.name %></option>
-  <%- end %>
+<%- available_templates.each do |template| %>
+  <option value="<%= template.id %>">[<%= template.project.name %>] <%= template.name %></option>
 <%- end %>
 </select>
 <%= submit_tag 'Load', :id => 'load_wiki_template' %>
 <span id="wiki_template_notice" style="display: none;"></span>
 </p></div>
 <script type='text/javascript'>
-  var wiki_templates_select = $('#wiki_templates_select');
-  $('#wiki_form').before(wiki_templates_select);
+  $('#wiki_form').before($('#wiki_templates_select'));
 
   $('#load_wiki_template').click(function() {
+    var selected_id = $('#wiki_template_selected').val();
+    if (selected_id === "0") return;
     if (confirm("the content will be replaced by template's text. sure?")) {
       $.get(
         "<%= url_for(:controller => 'wiki_templates', :action => :load) %>",
-        $.param({id:$('#wiki_template_selected').val()}),
-        function(data, status) {
+        $.param({id: selected_id}),
+        function(data) {
           $("#content_text").val(data);
-          show_flash("done.");
+          notify_success("done.");
         },
         "text"
       );
     }
   });
 
-  var show_flash = function(message) {
+  var notify_success = function(message) {
     $('#wiki_template_notice').stop(true,true).text(message).show().delay(3000).fadeOut('normal');
   }
 </script>

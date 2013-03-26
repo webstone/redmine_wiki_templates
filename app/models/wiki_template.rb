@@ -12,7 +12,9 @@ class WikiTemplate < ActiveRecord::Base
 
   scope :owned_by, ->(project_id) { where(:project_id => project_id) }
   scope :public, -> { where(:is_public => true) }
-  scope :others_public, ->(project_id) { where("is_public = ? and project_id != ?", true, project_id) }
+  scope :others_available, ->(project_id) { where("wiki_templates.is_public = ? and project_id != ?", true, project_id) }
+  scope :sort_by_name, -> { order("name ASC") }
+  scope :sort_by_proj, -> { joins(:project).order("projects.name ASC, name ASC") }
 
   safe_attributes 'name', 'text', 'is_public'
 end
