@@ -1,0 +1,12 @@
+# Chinese strings go here for Rails i18n
+zh:
+  project_module_wiki_templates: "维基模板"
+  label_template: "模板"
+  label_template_new: "新建维基模板"
+  label_choose_template: "维基模板"
+  label_load_template: "装载"
+  text_confirm_load_template: "模板的文本的内容将被替换。确定吗？"
+  text_notify_success_of_loading: "完毕"
+  text_notify_failure_of_loading: "错误: %{status}"
+  permission_show_wiki_templates: "使用维基模板"
+  permission_manage_wiki_templates: "管理维基模板"

@@ -1,0 +1,12 @@
+# German strings go here for Rails i18n
+de:
+  project_module_wiki_templates: "Wiki Vorlagen"
+  label_template: "Vorlagen"
+  label_template_new: "Neue Wiki Vorlage"
+  label_choose_template: "Vorlage auswählen"
+  label_load_template: "Last"
+  text_confirm_load_template: "Der Inhalt wird durch die Vorlage des Textes ersetzt werden. sicher?"
+  text_notify_success_of_loading: "durchgeführt"
+  text_notify_failure_of_loading: "Fehler: %{status}"
+  permission_show_wiki_templates: "Verwenden Wiki Vorlagen"
+  permission_manage_wiki_templates: "Verwalten Wiki Vorlagen"

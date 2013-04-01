@@ -1,0 +1,12 @@
+# strings en catalan here for Rails i18n
+ca:
+  project_module_wiki_templates: "Plantilles wiki"
+  label_template: "Plantilles"
+  label_template_new: "Nova plantilla wiki"
+  label_choose_template: "Tria una plantilla"
+  label_load_template: "Carregar"
+  text_confirm_load_template: "El contingut se substitueix pel text de la plantilla. segur?"
+  text_notify_success_of_loading: "acabat"
+  text_notify_failure_of_loading: "error: %{status}"
+  permission_show_wiki_templates: "Utilitza la plantilla wiki"
+  permission_manage_wiki_templates: "Administrar plantilla wiki"

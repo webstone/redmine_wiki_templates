@@ -1,0 +1,12 @@
+# Russian strings go here for Rails i18n
+ru:
+  project_module_wiki_templates: "Вики шаблоны"
+  label_template: "Шаблоны"
+  label_template_new: "Новый вики Шаблон"
+  label_choose_template: "Выберите шаблон"
+  label_load_template: "загружать"
+  text_confirm_load_template: "Содержание будет заменен на текст шаблона. Уверен?"
+  text_notify_success_of_loading: "законченный"
+  text_notify_failure_of_loading: "ошибка: %{status}"
+  permission_show_wiki_templates: "Использование шаблонов вики"
+  permission_manage_wiki_templates: "Управление шаблонами вики"

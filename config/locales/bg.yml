@@ -1,0 +1,12 @@
+# Bulgarian strings go here for Rails i18n
+bg:
+  project_module_wiki_templates: "Уики шаблони"
+  label_template: "Шаблони"
+  label_template_new: "Нов уики шаблон"
+  label_choose_template: "Изберете шаблон"
+  label_load_template: "зареждам"
+  text_confirm_load_template: "съдържанието ще бъде заменен от текста на шаблона.Сигурна ли си?"
+  text_notify_success_of_loading: "край"
+  text_notify_failure_of_loading: "грешка: %{status}"
+  permission_show_wiki_templates: "Използвайте уики шаблони"
+  permission_manage_wiki_templates: "Управление на уики шаблони"
