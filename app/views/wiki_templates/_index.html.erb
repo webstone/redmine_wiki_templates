@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th><%= l(:label_template) %></th>
-      <th><%= l(:field_is_public) %></th>
+      <th><%= l(:field_sharing) %></th>
       <th></th>
     </tr>
   </thead>
@@ -11,7 +11,7 @@
   <%- unless template.new_record? %>
     <tr class="<%= cycle 'odd', 'even' %>">
       <td><%= h(template.name) %></td>
-      <td class="center"><%= checked_image if template.is_public %></td>
+      <td class="center"><%= template.sharing %></td>
       <td class="buttons">
         <%- if User.current.allowed_to?(:manage_wiki_templates, @project) %>
         <%= link_to l(:button_edit), edit_wiki_template_path(template), :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>

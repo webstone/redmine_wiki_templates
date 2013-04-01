@@ -3,7 +3,7 @@
 <div class="box tabular">
 <p><%= f.text_field :name, :size => 30, :required => true %></p>
 <p><%= f.text_area :text, :cols => 100, :rows => 25, :class => 'wiki-edit', :accesskey => accesskey(:edit) %></p>
-<p><%= f.check_box :is_public %></p>
+<p><%= f.select :sharing, WikiTemplate::WIKI_TEMPLATE_SHARINGS %></p>
 </div>
 
 <%= wikitoolbar_for 'wiki_template_text' %>
