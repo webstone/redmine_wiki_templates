@@ -3,6 +3,7 @@
   return unless @project.module_enabled?(:wiki_templates)
   return unless User.current.allowed_to?(:show_wiki_templates, @project)
   return unless controller.class.name == 'WikiController'
+  return unless @page
   return unless @page.new_record?
 
   local_templates = WikiTemplate.owned_by(@project.id).sort_by_name
