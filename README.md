@@ -13,4 +13,4 @@ See [Official Plugin Installation Guide](http://www.redmine.org/projects/redmine
 Compatibility
 ---------
 
-Redmine 2.2.x and later.
+Redmine 3.0.x and later.

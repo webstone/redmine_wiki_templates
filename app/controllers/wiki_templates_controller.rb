@@ -10,7 +10,7 @@ class WikiTemplatesController < ApplicationController
   def new
     @wiki_template = WikiTemplate.new(:project => @project, :author => User.current)
     if request.post?
-      @wiki_template.safe_attributes = params[:wiki_template]
+      @wiki_template.attributes = wiki_template_params
       if @wiki_template.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to :controller => 'projects', :action => 'settings', :tab => 'wiki_templates', :id => @project
@@ -24,8 +24,8 @@ class WikiTemplatesController < ApplicationController
   end
 
   def update
-    @wiki_template.safe_attributes = params[:wiki_template]
-    if request.put? and @wiki_template.save
+    @wiki_template.attributes = wiki_template_params
+    if request.patch? and @wiki_template.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to :controller => 'projects', :action => 'settings', :tab => 'wiki_templates', :id => @project
     else
@@ -51,5 +51,11 @@ class WikiTemplatesController < ApplicationController
 
   def load
     render :text => @wiki_template.text
+  end
+
+  private
+
+  def wiki_template_params
+    params.require(:wiki_template).permit(:name, :text, :is_public)
   end
 end
