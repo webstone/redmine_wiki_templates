@@ -4,6 +4,7 @@
 <%= render :partial => 'form', :locals => {:f => f} %>
 <%= submit_tag l(:button_save) %>
 <%= preview_link({:controller => 'wiki_templates', :action => 'preview', :id => @wiki_template}, 'wiki_template_form') %>
+ | <%= link_to l(:button_cancel), back_url if back_url.present? %>
 <% end %>
 
 <div id="preview" class="wiki"></div>
