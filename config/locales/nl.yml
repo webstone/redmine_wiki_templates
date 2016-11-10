@@ -1,0 +1,12 @@
+# Dutch strings go here for Rails i18n
+en:
+  project_module_wiki_templates: "Wiki sjablonen"
+  label_template: "Sjabloon"
+  label_template_new: "Nieuw wiki sjabloon"
+  label_choose_template: "Kies een sjabloon"
+  label_load_template: "Laden"
+  text_confirm_load_template: "De wiki inhoud zal volledig overschreven worden door het sjabloon. Bent u zeker?"
+  text_notify_success_of_loading: "Sjabloon succesvol geladen."
+  text_notify_failure_of_loading: "Er is iets foutgelopen bij het laden van het sjabloon: %{status}"
+  permission_show_wiki_templates: "Gebruik wiki sjablonen"
+  permission_manage_wiki_templates: "Beheer wiki sjablonen"
