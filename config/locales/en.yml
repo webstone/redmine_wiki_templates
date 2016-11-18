@@ -5,7 +5,7 @@ en:
   label_template_new: "New wiki template"
   label_choose_template: "Choose a template"
   label_load_template: "Load"
-  text_confirm_load_template: "the content will be replaced by template's text. sure?"
+  text_confirm_load_template: "the content will be replaced by template. sure?"
   text_notify_success_of_loading: "done."
   text_notify_failure_of_loading: "error: %{status}"
   permission_show_wiki_templates: "Use wiki templates"

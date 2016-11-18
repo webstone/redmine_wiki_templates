@@ -34,7 +34,13 @@
         "<%= url_for(:controller => 'wiki_templates', :action => :load) %>",
         $.param({id: selected_id}),
         function(data) {
-          $("#content_text").val(data);
+          var cke_frm = $('iframe.cke_wysiwyg_frame')[0];
+          if (cke_frm) {
+            var cke_body = $('body', cke_frm.contentWindow.document);
+            cke_body.html(data);
+          } else {
+            $("#content_text").val(data);
+          }
           notify_success("<%= l(:text_notify_success_of_loading) %>");
         },
         "text"
